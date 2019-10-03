@@ -5,30 +5,23 @@
 #include <vector>
 #include <Debug.h>
 
-#include <chrono>
-//typedef std::chrono::high_resolution_clock Clock;
-
 using namespace std;
 
-
-class AnimatedSprite {
+class AnimatedSprite  {
 public:
-	AnimatedSprite(const SDL_Texture& texture, int numberOfFrames, int m_width, int m_height);
+	AnimatedSprite(SDL_Texture* texture, int speed);
 	~AnimatedSprite();
 
-	const std::pair<SDL_Rect
-
-	const vector<SDL_Rect>& getFrames();
-	const IntRect& getFrame(int);
-	void addFrame(SDL_Rect&);
-	const int getCurrentFrame();
 	void update();
+	void render(SDL_Renderer* t_renderer);
+	void addFrame(SDL_Rect t_rect);
 	
 private:
-	Clock m_clock;
-	Time m_time;
 	vector<SDL_Rect> m_frames;
 	int m_current_frame;
+	SDL_Texture* m_texture;
+	int m_speed;
+	SDL_Rect destRect;
 };
 
 #endif // !ANIMATED_SPRITE_H

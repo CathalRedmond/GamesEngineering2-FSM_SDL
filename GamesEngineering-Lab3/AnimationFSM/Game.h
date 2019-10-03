@@ -37,9 +37,10 @@ private:
 
 	std::string getErrorString(std::string t_errorMsg);
 
-	KeyboardInputHandler m_keyboardHandler;
+	KeyboardInputHandler* m_keyboardHandler;
 	Input m_input;
-	Player m_player;
+	Player* m_player;
+	AnimatedSprite* m_animatedSprite;
 
 };
 

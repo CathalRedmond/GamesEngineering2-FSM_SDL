@@ -8,12 +8,14 @@
 class KeyboardInputHandler
 {
 public:
+	KeyboardInputHandler(Input& t_input);
 	void handleInput(Input& t_input, SDL_Event t_event);
 private:
-	Command* ActionIdleCommand = new InputIdleCommand(m_input);
-	Command* ActionUpCommand = new InputUpCommand(m_input);
-	Command* ActionLeftCommand = new InputLeftCommand(m_input);
-	Command* ActionRightCommand = new InputRightCommand(m_input);
+	Command* ActionIdleCommand;
+	Command* ActionUpCommand;
+	Command* ActionLeftCommand;
+	Command* ActionRightCommand;
 	Input& m_input;
 };
+
 

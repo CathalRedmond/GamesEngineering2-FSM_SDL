@@ -2,13 +2,10 @@
 
 Game::Game()
 {
-
-	
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		throw getErrorString("Error Loading SDL");
 		isRunning = false;
-
 	}
 	else
 	{
@@ -33,19 +30,23 @@ Game::Game()
 		{
 			std::cout << getErrorString("Error Loading Texture") << std::endl;
 		}
+		m_animatedSprite = new AnimatedSprite(m_texture, 2000);
 
+		SDL_Rect frame;
+		frame.x = 3;
+		frame.y = 3;
+		frame.w = 84;
+		frame.h = 84;
+		m_animatedSprite->addFrame(frame);
+		while (frame.x != 428)
+		{
+			frame.x += 85;
+			m_animatedSprite->addFrame(frame);
+		}
+
+		m_keyboardHandler = new KeyboardInputHandler(m_input);
+		m_player = new Player(m_animatedSprite);
 	}
-	
-	/*
-
-	// Load a sprite to display
-	sf::Texture texture;
-	if (!texture.loadFromFile("assets\\grid.png")) {
-		DEBUG_MSG("Failed to load file");
-		return EXIT_FAILURE;
-	}
-	*/
-
 }
 
 Game::~Game()
@@ -77,19 +78,20 @@ void Game::processEvents()
 		break;
 	}
 
-	m_keyboardHandler.handleInput(m_input, event);
+	m_keyboardHandler->handleInput(m_input, event);
 
 }
 
 void Game::update()
 {
-	
+	m_player->handleInput(m_input);
+	m_player->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(m_renderer);
-	SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+	m_player->render(m_renderer);
 	SDL_RenderPresent(m_renderer);
 }
 

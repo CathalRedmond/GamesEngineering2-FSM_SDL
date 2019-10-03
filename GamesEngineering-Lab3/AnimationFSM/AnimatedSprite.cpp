@@ -1,54 +1,29 @@
 #include <AnimatedSprite.h>
 
-// x = width * static cast(int)(sdlgetitcks / speedbetweemframes) % numberofframes)
-
-AnimatedSprite::AnimatedSprite() 
+AnimatedSprite::AnimatedSprite(SDL_Texture* texture, int speed):
+m_texture{texture},
+m_speed{speed}
 {
 	m_current_frame = 0;
+	destRect.w = 80;
+	destRect.h = 80;
 }
 
-AnimatedSprite::AnimatedSprite(const sf::Texture& t) : Sprite(t), m_current_frame(0), m_time(seconds(0.5f)) {}
-
-AnimatedSprite::AnimatedSprite(const sf::Texture& t, const sf::IntRect& rect) : Sprite(t), m_current_frame(0), m_time(seconds(0.5f)) {
-	m_frames.push_back(rect);
+AnimatedSprite::~AnimatedSprite()
+{
 }
 
-AnimatedSprite::~AnimatedSprite() {}
-
-const sf::Clock& AnimatedSprite::getClock() {
-	return m_clock;
+void AnimatedSprite::update()
+{
+	m_current_frame  = static_cast<int>((SDL_GetTicks() / m_speed) % m_frames.size());
 }
 
-const sf::Time& AnimatedSprite::getTime() {
-	return m_time;
+void AnimatedSprite::render(SDL_Renderer* t_renderer)
+{
+	SDL_RenderCopy(t_renderer, m_texture, &m_frames[m_current_frame], &destRect);
 }
 
-const vector<IntRect>& AnimatedSprite::getFrames() {
-	return m_frames;
+void AnimatedSprite::addFrame(SDL_Rect t_rect)
+{
+	m_frames.push_back(t_rect);
 }
-
-const IntRect& AnimatedSprite::getFrame(int n) {
-	return m_frames[n];
-}
-
-void AnimatedSprite::addFrame(IntRect& frame) {
-	m_frames.push_back(frame);
-}
-
-const int AnimatedSprite::getCurrentFrame() {
-	return m_current_frame;
-}
-
-void AnimatedSprite::update(){
-	if (m_clock.getElapsedTime() > m_time) {
-		if (m_frames.size() > m_current_frame + 1)
-		{
-			m_current_frame++;
-		}
-		else {
-			m_current_frame = 0;
-		}
-		m_clock.restart();
-	}
-}
-

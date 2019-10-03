@@ -9,15 +9,15 @@ class Player
 {
 private:
 	PlayerFSM m_state;
-	AnimatedSprite m_animated_sprite;
+	AnimatedSprite* m_animated_sprite;
 	Player();
 
 public:
-	Player(const AnimatedSprite&);
+	Player(AnimatedSprite*);
 	~Player();
-	AnimatedSprite& getAnimatedSprite();
 	void handleInput(Input);
 	void update();
+	void render(SDL_Renderer* renderer);
 };
 
 #endif // !PLAYER_H
