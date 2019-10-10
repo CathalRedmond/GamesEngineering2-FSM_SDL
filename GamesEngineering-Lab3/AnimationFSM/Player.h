@@ -4,6 +4,11 @@
 #include <Input.h>
 #include <PlayerFSM.h>
 #include <AnimatedSprite.h>
+#include "Climbing.h"
+#include "Jumping.h"
+#include "Falling.h"
+#include "Walking.h"
+#include "Idle.h"
 
 class Player
 {

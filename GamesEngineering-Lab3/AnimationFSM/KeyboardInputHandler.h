@@ -3,6 +3,7 @@
 #include "InputUpCommand.h"
 #include "InputLeftCommand.h"
 #include "InputRightCommand.h"
+#include "InputDownCommand.h"
 #include <SDL.h>
 
 class KeyboardInputHandler
@@ -15,7 +16,9 @@ private:
 	Command* ActionUpCommand;
 	Command* ActionLeftCommand;
 	Command* ActionRightCommand;
+	Command* ActionDownCommand;
 	Input& m_input;
+	SDL_Keycode lastKeyPressed;
 };
 
 

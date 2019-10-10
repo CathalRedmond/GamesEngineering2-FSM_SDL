@@ -30,22 +30,26 @@ Game::Game()
 		{
 			std::cout << getErrorString("Error Loading Texture") << std::endl;
 		}
-		m_animatedSprite = new AnimatedSprite(m_texture, 2000);
+		m_fsmFrames = new AnimatedSprite(m_texture, 2000);
 
 		SDL_Rect frame;
 		frame.x = 3;
 		frame.y = 3;
 		frame.w = 84;
 		frame.h = 84;
-		m_animatedSprite->addFrame(frame);
-		while (frame.x != 428)
+		while (frame.y < 428)
 		{
+			m_fsmFrames->addFrame(frame);
 			frame.x += 85;
-			m_animatedSprite->addFrame(frame);
+			if (frame.x > 428)
+			{
+				frame.x = 3;
+				frame.y += 85;
+			}
 		}
 
 		m_keyboardHandler = new KeyboardInputHandler(m_input);
-		m_player = new Player(m_animatedSprite);
+		m_player = new Player(m_fsmFrames);
 	}
 }
 

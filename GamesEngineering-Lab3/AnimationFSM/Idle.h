@@ -12,6 +12,7 @@ public:
 	void update();
 	void jumping(PlayerFSM* a);
 	void climbing(PlayerFSM* a);
+	void walking(PlayerFSM* a);
 };
 
 #endif // !IDLE_H

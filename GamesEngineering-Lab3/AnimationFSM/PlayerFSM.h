@@ -23,6 +23,8 @@ public:
 	void idle();
 	void jumping();
 	void climbing();
+	void walking();
+	void falling();
 
 // Try uncommenting and comment the declaration above
 //private:

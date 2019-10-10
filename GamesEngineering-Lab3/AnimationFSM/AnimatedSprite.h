@@ -15,6 +15,7 @@ public:
 	void update();
 	void render(SDL_Renderer* t_renderer);
 	void addFrame(SDL_Rect t_rect);
+	void setStartFrame(int startFrame);
 	
 private:
 	vector<SDL_Rect> m_frames;
@@ -22,6 +23,7 @@ private:
 	SDL_Texture* m_texture;
 	int m_speed;
 	SDL_Rect destRect;
+	int m_startFrame;
 };
 
 #endif // !ANIMATED_SPRITE_H

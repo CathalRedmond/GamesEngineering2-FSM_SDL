@@ -7,6 +7,8 @@ KeyboardInputHandler::KeyboardInputHandler(Input& t_input):
 	ActionUpCommand = new InputUpCommand(m_input);
 	ActionLeftCommand = new InputLeftCommand(m_input);
 	ActionRightCommand = new InputRightCommand(m_input);
+	ActionDownCommand = new InputDownCommand(m_input);
+	lastKeyPressed = NULL;
 }
 
 void KeyboardInputHandler::handleInput(Input& t_input, SDL_Event t_event)
@@ -25,9 +27,18 @@ void KeyboardInputHandler::handleInput(Input& t_input, SDL_Event t_event)
 		{
 			ActionRightCommand->execute();
 		}
+		else if (SDLK_DOWN == t_event.key.keysym.sym)
+		{
+			ActionDownCommand->execute();
+		}
+		if (lastKeyPressed == NULL)
+		{
+			lastKeyPressed = t_event.key.keysym.sym;
+		}
 	}
-	else
+	else if(SDL_KEYUP == t_event.type && t_event.key.keysym.sym == lastKeyPressed)
 	{
 		ActionIdleCommand->execute();
+		lastKeyPressed = NULL;
 	}
 }

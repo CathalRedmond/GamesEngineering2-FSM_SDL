@@ -9,7 +9,7 @@ public:
 	Climbing() {};
 	~Climbing() {};
 	void idle(PlayerFSM* a);
-	void jumping(PlayerFSM* a);
+	void falling(PlayerFSM* a);
 };
 
 #endif // !IDLE_H

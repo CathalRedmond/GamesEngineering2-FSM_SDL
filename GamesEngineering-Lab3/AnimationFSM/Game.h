@@ -9,6 +9,7 @@
 #include <Debug.h>
 #include "KeyboardInputHandler.h"
 
+
 class Game
 {
 public:
@@ -40,7 +41,7 @@ private:
 	KeyboardInputHandler* m_keyboardHandler;
 	Input m_input;
 	Player* m_player;
-	AnimatedSprite* m_animatedSprite;
+	AnimatedSprite* m_fsmFrames;
 
 };
 
